@@ -1,0 +1,57 @@
+<template id="item-template">
+    <span></span>
+    <div id="details">
+        <h3></h3>
+        <p></p>
+    </div>
+    <style>
+        :host {
+            display: flex;
+        }
+
+        :host(:nth-child(even)) {
+            background: #eee;
+        }
+        
+        span {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 10px;
+            align-self: center;
+            color: #444;
+        }
+
+        #details {
+            align-self: center;
+            margin: 0 10px;
+            color: #444;
+        }
+    </style>
+</template>
+
+<script>
+    const $itemTemplate = document.currentScript.ownerDocument.querySelector('#item-template')
+    const detailsTemplate = (points, by, since, nbCom)  => 
+        `${points} points by ${by} ${since} | ${nbCom} comments` 
+
+    customElements.define('hn-item', class HNItem extends HTMLElement {
+        constructor() {
+            super()
+            const $shadowRoot = this.attachShadow({mode:'open'})
+            $shadowRoot.appendChild($itemTemplate.content.cloneNode(true))
+        }
+
+        connectedCallback() {
+            this.shadowRoot.querySelector('span').innerText = this.getAttribute('index') || ''
+            this.shadowRoot.querySelector('h3').innerText = this.getAttribute('title') || '' 
+            this.shadowRoot.querySelector('p').innerHTML = detailsTemplate (
+                this.getAttribute('points') || '',
+                this.getAttribute('by') || '',
+                this.getAttribute('since') || '',
+                this.getAttribute('comments-count') || ''
+            )           
+        }
+    })
+
+</script>

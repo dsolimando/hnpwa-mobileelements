@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>HN Custom Elements</title> 
+    <link rel="import" href="item.html">
+    <link rel="import" href="lib/view-controller.html">
+    <link rel="import" href="tabbar.html">
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100%;
+            overflow: hidden;
+        }
+        scell-tab-bar {
+            background: #000;
+            color: #fff;
+        }
+
+        scell-view > div {
+            overflow: auto;
+            height: 100%;
+        }
+
+    </style>
+</head> 
+<body> 
+  	<body>
+        <scell-view id="container">
+        </scell-view>
+        
+        <scell-tab-bar>
+            <scell-tab name="top" title="Top"></scell-tab>
+            <scell-tab name="new" title="New"></scell-tab>
+            <scell-tab name="show" title="Show"></scell-tab>
+            <scell-tab name="ask" title="Ask"></scell-tab>
+            <scell-tab name="jobs" title="Jobs"></scell-tab>
+        </scell-tab-bar>
+        <scell-zone-navigator container-selector="#container"></scell-zone-navigator> 
+    </body>
+
+    <script src="lib/zone-navigator.js"></script>
+    <script src="js/controllers.js"></script>
+    
+    <script>
+        const navigator = document.querySelector('scell-zone-navigator')
+        const tabbar = document.querySelector('scell-tab-bar')
+        tabbar.navigator = navigator
+        navigator.push({
+            viewController:TopController
+        })
+
+        const controllerMap = {
+            'top':TopController,
+            'new':NewsController,
+            'show':ShowController,
+            'ask':AskController,
+            'jobs':JobsController
+        }
+
+        tabbar.addEventListener('scell-tab-selected', data => {
+            navigator.push({
+                viewController:controllerMap[data.detail.name]
+            })
+        })
+    </script>
+</html> 

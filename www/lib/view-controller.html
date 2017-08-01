@@ -1,0 +1,30 @@
+<template id="view-controller-container">
+    <style>
+    .shadow-pane {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: #000;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+    </style>
+    <div class="shadow-pane" style="display:none"></div>
+    <slot></slot>
+</template>
+
+<style>
+    scell-view {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+</style>
+
+<script src="view-controller.js"></script>
