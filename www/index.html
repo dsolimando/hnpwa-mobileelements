@@ -5,12 +5,15 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    
     <title>HN Custom Elements</title> 
-    <link rel="import" href="item.html">
+    
+    <link rel="import" href="lib/tabbar.html">
     <link rel="import" href="lib/view-controller.html">
-    <script src="lib/view-controller.js"></script>
-    <link rel="import" href="tabbar.html">
+    <link rel="import" href="lib/navigation-bar.html">
 
+    <link rel="import" href="item.html">
+    
     <style>
         body{
             font-family: Arial, Helvetica, sans-serif;
@@ -27,6 +30,19 @@
             height: 100%;
         }
 
+        #comments-view {
+            background: #fff;
+        }
+
+        #comments-container {
+            overflow: auto;
+        } 
+
+        #comments-container hn-item {
+            padding-top: 50px;
+            background: #eee;
+        }
+
     </style>
 </head> 
 <body> 
@@ -34,7 +50,7 @@
         <scell-view id="container">
         </scell-view>
         
-        <scell-tab-bar>
+        <scell-tab-bar active-color="rgb(40,152,211)">
             <scell-tab name="top" title="Top"></scell-tab>
             <scell-tab name="new" title="New"></scell-tab>
             <scell-tab name="show" title="Show"></scell-tab>
@@ -45,13 +61,14 @@
     </body>
 
     <script src="lib/zone-navigator.js"></script>
-    <script src="js/controllers.js"></script>
-    
+    <script src="lib/push-navigator.js"></script>
+    <script src="js/items-controllers.js"></script>
     
     <script>
         const navigator = document.querySelector('scell-zone-navigator')
         const tabbar = document.querySelector('scell-tab-bar')
         tabbar.navigator = navigator
+        tabbar.setActive(0)
         navigator.push({
             viewController:TopController
         })
@@ -70,4 +87,7 @@
             })
         })
     </script>
+
+    <link rel="import" href="comment.html">
+    <script src="js/comments-controller.js" async defer></script>
 </html> 

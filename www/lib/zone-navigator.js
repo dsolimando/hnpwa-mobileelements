@@ -18,7 +18,7 @@ class ZoneNavigator extends HTMLElement {
     }
 
     push (state) {
-        const controller = new state.viewController()
+        const controller = new state.viewController(state.props)
         controller.navigator = this;
         this.$container.innerHTML = ''
         this.$container.appendChild(controller.render())
