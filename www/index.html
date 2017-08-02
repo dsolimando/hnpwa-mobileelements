@@ -2,11 +2,13 @@
 <html> 
 <head> 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    
-    <title>HN Custom Elements</title> 
+    <meta name="theme-color" content="#000000">
+
+    <title>HN Vanilla Custom Elements</title> 
+
+    <link rel="manifest" href="manifest.js">
     
     <link rel="import" href="lib/tabbar.html">
     <link rel="import" href="lib/view-controller.html">
@@ -65,11 +67,11 @@
     <script src="js/items-controllers.js"></script>
     
     <script>
-        const navigator = document.querySelector('scell-zone-navigator')
+        const znavigator = document.querySelector('scell-zone-navigator')
         const tabbar = document.querySelector('scell-tab-bar')
-        tabbar.navigator = navigator
+        tabbar.navigator = znavigator
         tabbar.setActive(0)
-        navigator.push({
+        znavigator.push({
             viewController:TopController
         })
 
@@ -82,10 +84,17 @@
         }
 
         tabbar.addEventListener('scell-tab-selected', data => {
-            navigator.push({
+            znavigator.push({
                 viewController:controllerMap[data.detail.name]
             })
         })
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(
+                registration => { console.log(registration) },
+                error => {console.log(error)}
+            );
+        }
     </script>
 
     <link rel="import" href="comment.html">
