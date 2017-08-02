@@ -1,0 +1,73 @@
+<template id="comment-template">
+    <div id="header"><!-- Header--></div>
+    <p id="content"><!-- Content--></p>
+    <div id="children"><!-- comment children--></div>
+    <style>
+        :host {
+            padding: 10px;
+            font-size: 14px;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        #content {
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</template>
+
+<script>
+    const $commentTemplate =document.currentScript.ownerDocument.querySelector('#comment-template')
+
+    const headerTemplate = (user, since) => `
+        <span><b>${user}</b></span>&nbsp;&nbsp;<span>${since}</span>&nbsp;&nbsp;<span id="minus">➖</span>
+    `
+    class CommentElement extends HTMLElement {
+        constructor() {
+            super()
+            const $shadowRoot = this.attachShadow({mode:'open'})
+            $shadowRoot.appendChild($commentTemplate.content.cloneNode(true))
+            this.expended = true
+            
+        }
+
+        get comment() { return this._comment }
+        set comment (comment) { this._comment = comment }
+
+        connectedCallback() {
+            const $header = this.shadowRoot.querySelector('#header')
+            const $content = this.shadowRoot.querySelector('#content')
+            this.style.paddingLeft = (10+(2*(this._comment.level)))+'px'
+            
+            $header.innerHTML = headerTemplate(this._comment.user, this._comment.time_ago)
+            $content.innerHTML = this._comment.content
+
+            $header.onclick = event => {
+                if (!event.target.matches('#minus')) return 
+                
+                if (this.expended) {
+                    $content.style.display = 'none'
+                    this.shadowRoot.querySelector('#children').style.display = 'none'
+                    this.expended = false
+                    event.target.innerText = '➕'
+                } else {
+                    $content.style.display = null
+                    this.shadowRoot.querySelector('#children').style.display = null
+                    this.expended = true
+                    event.target.innerText = '➖'
+                }
+            }
+
+            if (this._comment.comments.length > 0) {
+                const $container = this.shadowRoot.querySelector('#children')
+                this._comment.comments.forEach( comment => {
+                    const ce = document.createElement('hn-comment')
+                    ce.comment = comment
+                    $container.appendChild(ce)
+                })
+            }
+        }
+    }
+
+    customElements.define('hn-comment',CommentElement)
+</script>
