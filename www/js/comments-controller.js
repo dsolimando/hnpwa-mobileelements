@@ -39,6 +39,8 @@ class CommentsController {
             comments-count="${response.comments_count}"
         />`)
 
+        $container.querySelector('hn-item').shadowRoot.querySelector('span').remove()
+
         response.comments.forEach (comment => {
             const $comment = document.createElement('hn-comment')
             $comment.comment = comment

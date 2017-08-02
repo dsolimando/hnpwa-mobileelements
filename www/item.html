@@ -1,7 +1,7 @@
 <template id="item-template">
     <span></span>
     <div id="details">
-        <h3></h3>
+        <h4></h4>
         <p></p>
     </div>
     <style>
@@ -16,16 +16,26 @@
         span {
             display: block;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: lighter;
             margin: 0 10px;
             align-self: center;
             color: #444;
+            padding-left: 5px;
         }
 
         #details {
             align-self: center;
             margin: 0 10px;
             color: #444;
+        }
+
+        h4 {
+            margin:10px 0; 
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 13px;
         }
     </style>
 </template>
@@ -44,7 +54,7 @@
 
         connectedCallback() {
             this.shadowRoot.querySelector('span').innerText = this.getAttribute('index') || ''
-            this.shadowRoot.querySelector('h3').innerText = this.getAttribute('title') || '' 
+            this.shadowRoot.querySelector('h4').innerText = this.getAttribute('title') || '' 
             this.shadowRoot.querySelector('p').innerHTML = detailsTemplate (
                 this.getAttribute('points') || '',
                 this.getAttribute('by') || '',
