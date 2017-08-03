@@ -1,6 +1,6 @@
 const openCache = caches.open('hn-vanilla-custom-elements');
 
-const version = 1.5
+const version = 1.8
 
 const cachedFiles = [
     '/',

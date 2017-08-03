@@ -70,7 +70,7 @@
     
     <script>
 
-        window.addEventListener('WebComponentsReady', _ => {
+        const init = _ => {
             const znavigator = document.querySelector('scell-zone-navigator')
             const tabbar = document.querySelector('scell-tab-bar')
             tabbar.navigator = znavigator
@@ -99,8 +99,14 @@
                     error => {console.log(error)}
                 );
             }
-    });
-        
+        }
+        if (!window.customElements) {
+            window.addEventListener('WebComponentsReady', _ => {
+                init()
+            });
+        } else {
+            init()
+        }
     </script>
 
     <link rel="import" href="comment.html">
