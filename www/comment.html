@@ -19,6 +19,9 @@
 <script>
     const $commentTemplate =document.currentScript.ownerDocument.querySelector('#comment-template')
 
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate($commentTemplate,'hn-comment')
+
     const headerTemplate = (user, since) => `
         <span><b>${user}</b></span>&nbsp;&nbsp;<span>${since}</span>&nbsp;&nbsp;<span id="minus">➖</span>
     `
@@ -35,6 +38,10 @@
         set comment (comment) { this._comment = comment }
 
         connectedCallback() {
+
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this);
+
             const $header = this.shadowRoot.querySelector('#header')
             const $content = this.shadowRoot.querySelector('#content')
             this.style.paddingLeft = (10+(2*(this._comment.level)))+'px'
@@ -44,7 +51,7 @@
 
             $header.onclick = event => {
                 if (!event.target.matches('#minus')) return 
-                
+
                 if (this.expended) {
                     $content.style.display = 'none'
                     this.shadowRoot.querySelector('#children').style.display = 'none'

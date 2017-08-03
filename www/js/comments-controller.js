@@ -17,7 +17,7 @@ class CommentsController {
         this.loadData()
 
         this.$el.onclick = event => {
-            if (event.target.matches('scell-navigation-bar > span')) {
+            if (event.target.matches('scell-navigation-bar span')) {
                 this.$el.hide()
                 setTimeout( _ => {
                     this.$el.remove()
@@ -31,20 +31,21 @@ class CommentsController {
         const response = await data.json()
         const $container = this.$el.querySelector('#comments-container')
         
-        $container.insertAdjacentHTML('beforeend',`<hn-item 
-            title="${response.title}"
-            points="${response.points}"
-            by="${response.user}"
-            since="${response.time_ago}"
-            comments-count="${response.comments_count}"
-        />`)
+        const hnItem = document.createElement('hn-item')
+        hnItem.title = response.title
+        hnItem.points = response.points
+        hnItem.by = response.user
+        hnItem.since = response.time_ago
+        hnItem.commentsCount = response.comments_count
 
-        $container.querySelector('hn-item').shadowRoot.querySelector('span').remove()
+        $container.appendChild(hnItem)
+
+        hnItem.shadowRoot.querySelector('span').remove()
 
         response.comments.forEach (comment => {
             const $comment = document.createElement('hn-comment')
             $comment.comment = comment
-            $container.insertAdjacentElement('beforeend',$comment)
+            $container.appendChild($comment)
         })       
     } 
 

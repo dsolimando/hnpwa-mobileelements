@@ -69,10 +69,18 @@
 <script>
     const backButtonTemplate = document.currentScript.ownerDocument.querySelector('#back-button-template') 
     
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate(backButtonTemplate,'scell-back-button')
+
     customElements.define('scell-back-button', class ScellBackButon extends HTMLElement {
         constructor() {
             super()
             this.appendChild(backButtonTemplate.content.cloneNode(true))
+        }
+
+        connectedCallback() {
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this);
         }
 
         hide () {
@@ -98,6 +106,9 @@
 <script>
     const hamburgerTemplate = document.currentScript.ownerDocument.querySelector("#hamburger-button-template")
     
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate(hamburgerTemplate,'scell-hamburger-button')
+
     customElements.define('scell-hamburger-button', class ScellHamburgerButton extends HTMLElement {
         constructor() {
             super()
@@ -106,6 +117,9 @@
         }
 
         connectedCallback() {
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this);
+                
             if (this.getAttribute('color')) {
                 this.shadowRoot.querySelectorAll('div').forEach( $div => {
                     $div.style.backgroundColor = this.getAttribute('color')

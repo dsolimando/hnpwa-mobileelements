@@ -42,6 +42,10 @@
 
 <script>
     const $itemTemplate = document.currentScript.ownerDocument.querySelector('#item-template')
+    
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate($itemTemplate,'hn-item')
+
     const detailsTemplate = (points, by, since, nbCom)  => 
         `${points} points by ${by} ${since} | ${nbCom} comments` 
 
@@ -53,6 +57,10 @@
         }
 
         connectedCallback() {
+
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this);
+
             this.shadowRoot.querySelector('span').innerText = this.getAttribute('index') || ''
             this.shadowRoot.querySelector('h4').innerText = this.getAttribute('title') || '' 
             this.shadowRoot.querySelector('p').innerHTML = detailsTemplate (
@@ -62,6 +70,27 @@
                 this.getAttribute('comments-count') || ''
             )           
         }
+
+        get index() { return this.getAttribute('index')}
+        set index (index) { this.setAttribute('index', index) }
+
+        get id() { return this.getAttribute('id')}
+        set id (id) { this.setAttribute('id', id) }
+
+        get title() { return this.getAttribute('title')}
+        set title (title) { this.setAttribute('title', title) }
+
+        get points() { return this.getAttribute('points')}
+        set points (points) { this.setAttribute('points', points) }
+
+        get by() { return this.getAttribute('by')}
+        set by (by) { this.setAttribute('by', by) }
+
+        get since() { return this.getAttribute('since')}
+        set since (since) { this.setAttribute('since', since) }
+
+        get commentsCount() { return this.getAttribute('comments-count')}
+        set commentsCount (commentsCount) { this.setAttribute('comments-count', commentsCount) }
     })
 
 </script>

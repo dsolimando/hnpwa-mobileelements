@@ -30,6 +30,9 @@
 <script>
     const template = document.currentScript.ownerDocument.querySelector('#view-controller-container')
 
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate(tabBarTemplate,'scell-view')
+        
     class View extends HTMLElement {
 
         constructor() {
@@ -85,6 +88,10 @@
             }
         }
         
+        connectedCallback() {
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this);
+        }
     }
     customElements.define('scell-view',View)
 </script>

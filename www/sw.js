@@ -1,6 +1,6 @@
 const openCache = caches.open('hn-vanilla-custom-elements');
 
-const version = 1.3
+const version = 1.5
 
 const cachedFiles = [
     '/',
@@ -8,8 +8,10 @@ const cachedFiles = [
     '/lib/tabbar.html',
     '/lib/view-controller.html',
     '/lib/navigation-bar.html',
-    '/lib/zone-navigator.js',
+    '/lib/zone-navigator.html',
     '/lib/push-navigator.js',
+    '/lib/webcomponents-loader.js',
+    '/lib/webcomponents-hi-sd-ce.js',
     '/item.html',
     '/js/items-controllers.js',
     '/comment.html',

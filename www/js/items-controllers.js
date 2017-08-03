@@ -1,14 +1,3 @@
-const itemTemplate = result => `
-<hn-item 
-    id="${result.id}"
-    index="${result.index}"
-    title="${result.title}"
-    points="${result.points}"
-    by="${result.user}"
-    comments-count="${result.comments_count}">
-</hn-item>
-`
-
 class ItemsController {
 
     constructor(url) {
@@ -34,7 +23,7 @@ class ItemsController {
                     viewController:CommentsController,
                     props: {
                         title:'Comments',
-                        itemId: $item.getAttribute("id")
+                        itemId: $item.id
                     }
                 })
             },250)
@@ -51,9 +40,17 @@ class ItemsController {
         const response = await fetch(url)
         const results = await response.json()
         let i = 1
+        let that = this
         results.forEach ( result => {
-            result.index = ((this.page)*this.pageSize)+(i++)
-            this.$el.insertAdjacentHTML('beforeend',itemTemplate(result))
+            const hnItem = document.createElement('hn-item')
+            hnItem.index = ((this.page)*this.pageSize)+(i++)
+            hnItem.id = result.id
+            hnItem.title = result.title
+            hnItem.points = result.points
+            hnItem.by = result.user
+            hnItem.since = result.time_ago
+            hnItem.commentsCount = result.comments_count
+            that.$el.appendChild(hnItem)
         })
         this.page++
         this.loading = false

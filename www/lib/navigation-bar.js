@@ -1,5 +1,8 @@
 const navTemplate = document.currentScript.ownerDocument.querySelector('#navigation-bar-template')
 
+if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate(navTemplate,'scell-navigation-bar')
+
 class NavigationBar extends HTMLElement {
 
     constructor() {
@@ -33,6 +36,11 @@ class NavigationBar extends HTMLElement {
     get rightSlotAssignedNode () {
         const slots = this.shadowRoot.querySelectorAll('slot')[1].assignedNodes()[0]
     }
+
+    connectedCallback() {
+        if (window.ShadyCSS)
+            ShadyCSS.styleElement(this);
+    } 
 
     render () {
         setTimeout( _ => {

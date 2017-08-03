@@ -23,12 +23,19 @@
 <script>
     const tabBarTemplate = document.currentScript.ownerDocument.querySelector('#scell-tab-bar-template')
     
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate(tabBarTemplate,'scell-tab-bar')
+    
     customElements.define('scell-tab', class ScellTab extends HTMLElement {
         constructor() {
             super()
         }
 
         connectedCallback() {
+
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this);
+                
             if (this.getAttribute('icon')) {
                 const image = new Image()
                 image.onload = event => {
@@ -63,6 +70,8 @@
         }
 
         connectedCallback() {
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this);
             this.onclick = event => {
                 let name
                 if (event.target.matches('scell-tab > span')) {

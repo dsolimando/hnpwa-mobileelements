@@ -10,6 +10,9 @@
 
     <link rel="manifest" href="manifest.js">
     
+    <script src="lib/webcomponents-loader.js"></script>
+
+    <link rel="import" href="lib/zone-navigator.html">
     <link rel="import" href="lib/tabbar.html">
     <link rel="import" href="lib/view-controller.html">
     <link rel="import" href="lib/navigation-bar.html">
@@ -62,39 +65,42 @@
         <scell-zone-navigator container-selector="#container"></scell-zone-navigator> 
     </body>
 
-    <script src="lib/zone-navigator.js"></script>
     <script src="lib/push-navigator.js"></script>
     <script src="js/items-controllers.js"></script>
     
     <script>
-        const znavigator = document.querySelector('scell-zone-navigator')
-        const tabbar = document.querySelector('scell-tab-bar')
-        tabbar.navigator = znavigator
-        tabbar.setActive(0)
-        znavigator.push({
-            viewController:TopController
-        })
 
-        const controllerMap = {
-            'top':TopController,
-            'new':NewsController,
-            'show':ShowController,
-            'ask':AskController,
-            'jobs':JobsController
-        }
-
-        tabbar.addEventListener('scell-tab-selected', data => {
+        window.addEventListener('WebComponentsReady', _ => {
+            const znavigator = document.querySelector('scell-zone-navigator')
+            const tabbar = document.querySelector('scell-tab-bar')
+            tabbar.navigator = znavigator
+            tabbar.setActive(0)
             znavigator.push({
-                viewController:controllerMap[data.detail.name]
+                viewController:TopController
             })
-        })
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').then(
-                registration => { console.log(registration) },
-                error => {console.log(error)}
-            );
-        }
+            const controllerMap = {
+                'top':TopController,
+                'new':NewsController,
+                'show':ShowController,
+                'ask':AskController,
+                'jobs':JobsController
+            }
+
+            tabbar.addEventListener('scell-tab-selected', data => {
+                znavigator.push({
+                    viewController:controllerMap[data.detail.name]
+                })
+            })
+
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js').then(
+                    registration => { console.log(registration) },
+                    error => {console.log(error)}
+                );
+            }
+    });
+        
     </script>
 
     <link rel="import" href="comment.html">
