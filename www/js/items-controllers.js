@@ -64,30 +64,30 @@ class ItemsController {
 
 class NewsController extends ItemsController {
     constructor() {
-        super("https://node-hnapi.herokuapp.com/newest")
+        super("api/newest")
     }    
 }
 
 class TopController extends ItemsController {
    constructor() {
-        super("https://node-hnapi.herokuapp.com/news")
+        super("api/news")
     }  
 }
 
 class ShowController extends ItemsController {
    constructor() {
-        super("https://node-hnapi.herokuapp.com/show")
+        super("api/show")
     }  
 }
 
 class AskController extends ItemsController {
    constructor() {
-        super("https://node-hnapi.herokuapp.com/ask")
+        super("api/ask")
     }  
 }
 
 class JobsController extends ItemsController {
    constructor() {
-        super("https://node-hnapi.herokuapp.com/jobs")
+        super("api/jobs")
     }  
 }
