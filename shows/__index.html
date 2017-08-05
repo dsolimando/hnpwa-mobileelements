@@ -90,10 +90,7 @@
 
             tabbar.addEventListener('scell-tab-selected', data => {
                 znavigator.push({
-                    viewController:controllerMap[data.detail.name],
-                    props:{
-                        nodata:true
-                    }
+                    viewController:controllerMap[data.detail.name]
                 })
             })
 
