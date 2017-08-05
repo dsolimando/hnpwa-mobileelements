@@ -9,8 +9,6 @@
     <title>HN Vanilla Custom Elements</title> 
 
     <link rel="manifest" href="manifest.js">
-    
-    <script src="lib/webcomponents-loader.js"></script>
 
     <link rel="import" href="lib/zone-navigator.html">
     <link rel="import" href="lib/tabbar.html">
@@ -66,6 +64,7 @@
         <scell-zone-navigator container-selector="#container"></scell-zone-navigator> 
     </body>
 
+    <script src="lib/webcomponents-loader.js"></script>
     <script src="lib/push-navigator.js"></script>
     <script src="js/items-controllers.js"></script>
     
@@ -76,9 +75,6 @@
             const tabbar = document.querySelector('scell-tab-bar')
             tabbar.navigator = znavigator
             tabbar.setActive(0)
-            znavigator.push({
-                viewController:TopController
-            })
 
             const controllerMap = {
                 'top':TopController,
