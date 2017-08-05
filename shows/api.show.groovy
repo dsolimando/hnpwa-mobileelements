@@ -8,7 +8,7 @@ rest.get('/index.html').then {
     show.http ([
         url:'https://node-hnapi.herokuapp.com/show'
     ]).then { body, status, resp ->
-        def hnItems = ''
+        def hnItems = '<div>'
         int i = 1
         body.each {
             hnItems += """<hn-item index="${i++}" 
@@ -20,6 +20,7 @@ rest.get('/index.html').then {
                 comments-count="${it.comments_count}"></hn-item>
             """
         }
+        hnItems +='</div>'
         new Response(200,['Content-Type':'text/html'],template.make([items:hnItems]).toString())
     }
 }

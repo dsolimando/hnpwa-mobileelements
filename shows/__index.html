@@ -75,6 +75,12 @@
             const tabbar = document.querySelector('scell-tab-bar')
             tabbar.navigator = znavigator
             tabbar.setActive(0)
+            znavigator.push({
+                viewController:TopController,
+                props: {
+                    nodata:true
+                }
+            })
 
             const controllerMap = {
                 'top':TopController,
