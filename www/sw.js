@@ -4,7 +4,6 @@ const version = 1.8
 
 const cachedFiles = [
     '/',
-    '/index.html',
     '/lib/tabbar.html',
     '/lib/view-controller.html',
     '/lib/navigation-bar.html',

@@ -4,7 +4,12 @@ class ItemsController {
         this.$el = document.createElement('div')
 
         this.loading = false
-        this.loadData(url)
+        
+        if (this.props && this.props.nodata)
+            this.page++
+        else
+            this.loadData(url)
+        
         this.page = 0
         this.pageSize = 30;
         
