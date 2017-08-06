@@ -6,7 +6,7 @@ class ItemsController {
 
         this.loading = false
         
-        this.page = 0
+        this.page = 1
         this.pageSize = 30;
 
         if (this.props.data)
@@ -44,7 +44,7 @@ class ItemsController {
         let i = 1
         results.forEach ( result => {
             const hnItem = document.createElement('hn-item')
-            hnItem.index = ((this.page)*this.pageSize)+(i++)
+            hnItem.index = ((this.page-1)*this.pageSize)+(i++)
             hnItem.id = result.id
             hnItem.title = result.title
             hnItem.points = result.points
