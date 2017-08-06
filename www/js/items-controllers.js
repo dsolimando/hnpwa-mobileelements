@@ -92,7 +92,7 @@ class ShowController extends ItemsController {
 
 class AskController extends ItemsController {
    constructor(props) {
-        props;url = "https://node-hnapi.herokuapp.com/ask"
+        props.url = "https://node-hnapi.herokuapp.com/ask"
         super(props)
     }  
 }
