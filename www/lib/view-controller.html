@@ -1,5 +1,16 @@
 <template id="view-controller-container">
     <style>
+    :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
     .shadow-pane {
         position: absolute;
         width: 100%;
@@ -13,32 +24,13 @@
     </style>
     <div class="shadow-pane" style="display:none"></div>
     <slot></slot>
-
-    <style>
-        :host {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            box-sizing: border-box;
-            overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        slot {
-            overflow: auto;
-        }
-    </style>
 </template>
-
-
 
 <script>
     const template = document.currentScript.ownerDocument.querySelector('#view-controller-container')
 
     if (window.ShadyCSS)
-        ShadyCSS.prepareTemplate(tabBarTemplate,'scell-view')
+        ShadyCSS.prepareTemplate(template,'scell-view')
         
     class View extends HTMLElement {
 
