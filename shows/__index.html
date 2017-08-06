@@ -31,6 +31,11 @@
         scell-view > div {
             overflow: auto;
             height: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        scell-view > scell-navigation-bar {
+            height: 50px
         }
 
         #comments-view {
@@ -38,12 +43,18 @@
         }
 
         #comments-container {
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-top: 50px;
         } 
 
         #comments-container hn-item {
-            padding-top: 50px;
             background: #eee;
+        }
+
+        scell-navigation-bar {
+            color: #fff;
+            background-color: #000;
         }
 
     </style>
@@ -51,7 +62,6 @@
 <body> 
   	<body>
         <scell-view id="container">
-            ${items}
         </scell-view>
         
         <scell-tab-bar active-color="rgb(40,152,211)">
@@ -64,6 +74,7 @@
         <scell-zone-navigator container-selector="#container"></scell-zone-navigator> 
     </body>
 
+    ${scriptData}
     <script src="lib/webcomponents-loader.js"></script>
     <script src="lib/push-navigator.js"></script>
     <script src="js/items-controllers.js"></script>
@@ -78,7 +89,7 @@
             znavigator.push({
                 viewController:TopController,
                 props: {
-                    nodata:true
+                    data:initData
                 }
             })
 
@@ -103,7 +114,7 @@
                 );
             }
         }
-        if (!window.customElements) {
+        if (!('import' in document.createElement('link'))) {
             window.addEventListener('WebComponentsReady', _ => {
                 init()
             });

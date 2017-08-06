@@ -9,24 +9,6 @@ class NavigationBar extends HTMLElement {
         super()
         const shadowRoot = this.attachShadow({mode:'open'})
         shadowRoot.appendChild(navTemplate.content.cloneNode(true))
-
-        this.$title = shadowRoot.querySelector('.center-zone > span')
-        this.$title.innerText = this.getAttribute('title') || 'Title'
-
-        this.$backTitle = shadowRoot.querySelector('.back-zone > span')
-        this.$backTitle.innerText = this.getAttribute('back-title') || ''
-
-        this.backZone = shadowRoot.querySelector('.back-zone')
-        
-        if (this.backZone && this.navigator && this.navigator.pop) {
-            this.backZone.onclick = event => {
-                this.navigator.pop()
-            }
-        }
-        
-        if (this.getAttribute('anim-back-title')) {
-            this.$backTitle.style.transform = 'translateX(50px)'
-        }
     }
 
     get leftSlotAssignedNode () {
@@ -40,6 +22,24 @@ class NavigationBar extends HTMLElement {
     connectedCallback() {
         if (window.ShadyCSS)
             ShadyCSS.styleElement(this);
+
+        this.$title = this.shadowRoot.querySelector('.center-zone > span')
+        this.$title.innerText = this.getAttribute('title') || 'Title'
+
+        this.$backTitle = this.shadowRoot.querySelector('.back-zone > span')
+        this.$backTitle.innerText = this.getAttribute('back-title') || ''
+
+        this.backZone = this.shadowRoot.querySelector('.back-zone')
+        
+        if (this.backZone && this.navigator && this.navigator.pop) {
+            this.backZone.onclick = event => {
+                this.navigator.pop()
+            }
+        }
+        
+        if (this.getAttribute('anim-back-title')) {
+            this.$backTitle.style.transform = 'translateX(50px)'
+        }
     } 
 
     render () {

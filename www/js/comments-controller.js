@@ -1,7 +1,7 @@
 const commentsViewTemplate = barTitle => `
     <scell-view id="comments-view" transition="cover-vertical">
         <scell-navigation-bar title="${barTitle}">
-            <span>✖️</span>
+            <span>Close</span>
         </scell-navigation-bar>
         <div id="comments-container"></div>
     </scell-view>
@@ -26,27 +26,31 @@ class CommentsController {
         }
     }
 
-    async loadData() {
-        const data = await fetch(`https://node-hnapi.herokuapp.com/item/${this.props.itemId}`)
-        const response = await data.json()
-        const $container = this.$el.querySelector('#comments-container')
+    loadData() {
         
-        const hnItem = document.createElement('hn-item')
-        hnItem.title = response.title
-        hnItem.points = response.points
-        hnItem.by = response.user
-        hnItem.since = response.time_ago
-        hnItem.commentsCount = response.comments_count
+        const data = fetch(`https://node-hnapi.herokuapp.com/item/${this.props.itemId}`).then( data => {
+            return data.json()
+        }).then( response => {
+            setTimeout(_ => {
+                const $container = this.$el.querySelector('#comments-container')
+                const hnItem = document.createElement('hn-item')
+                hnItem.title = response.title
+                hnItem.points = response.points
+                hnItem.by = response.user
+                hnItem.since = response.time_ago
+                hnItem.commentsCount = response.comments_count
 
-        $container.appendChild(hnItem)
+                $container.appendChild(hnItem)
 
-        hnItem.shadowRoot.querySelector('span').remove()
+                hnItem.shadowRoot.querySelector('span').remove()
 
-        response.comments.forEach (comment => {
-            const $comment = document.createElement('hn-comment')
-            $comment.comment = comment
-            $container.appendChild($comment)
-        })       
+                response.comments.forEach (comment => {
+                    const $comment = document.createElement('hn-comment')
+                    $comment.comment = comment
+                    $container.appendChild($comment)
+                })         
+            },200)
+        })
     } 
 
     render() {

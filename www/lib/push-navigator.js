@@ -1,7 +1,7 @@
 class PushNavigator  {
 
     push (state) {
-
+        state.props = state.props || {}
         const controller = new state.viewController(state.props)
         controller.navigator = this
         const view = controller.render()

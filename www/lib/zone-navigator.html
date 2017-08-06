@@ -17,6 +17,7 @@
         }
 
         push (state) {
+            state.props = state.props || {}
             const controller = new state.viewController(state.props)
             controller.navigator = this;
             this.$container.innerHTML = ''

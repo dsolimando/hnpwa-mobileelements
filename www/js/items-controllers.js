@@ -1,23 +1,24 @@
 class ItemsController {
 
-    constructor(url) {
+    constructor(props) {
+        this.props = props
         this.$el = document.createElement('div')
 
         this.loading = false
         
-        if (this.props && this.props.nodata)
-            this.page++
-        else
-            this.loadData(url)
-        
         this.page = 0
         this.pageSize = 30;
+
+        if (this.props.data)
+            this.createElements(this.props.data)
+        else
+            this.loadData(this.props.url)
         
         this.pushNavigator = new PushNavigator()
 
         this.$el.onscroll = event => {
             if( this.$el.scrollTop + window.screen.height  >= this.$el.scrollHeight ) {
-                this.loadData(`${url}?page=${this.page}`)
+                this.loadData(`${this.props.url}?page=${this.page}`)
             }
         }
 
@@ -39,13 +40,8 @@ class ItemsController {
         return this.$el
     }
 
-    async loadData(url) {
-        if (this.loading) return
-        this.loading = true
-        const response = await fetch(url)
-        const results = await response.json()
+    createElements(results) {
         let i = 1
-        let that = this
         results.forEach ( result => {
             const hnItem = document.createElement('hn-item')
             hnItem.index = ((this.page)*this.pageSize)+(i++)
@@ -55,39 +51,55 @@ class ItemsController {
             hnItem.by = result.user
             hnItem.since = result.time_ago
             hnItem.commentsCount = result.comments_count
-            that.$el.appendChild(hnItem)
+            this.$el.appendChild(hnItem)
         })
         this.page++
-        this.loading = false
+    }
+
+    loadData(url) {
+        if (this.loading) return
+        this.loading = true
+
+        fetch(url).then( resp => { resp.json().then( results => {
+            setTimeout( _ => {
+                this.createElements(results)                
+                this.loading = false
+            },200)
+        })})
     }
 }
 
 class NewsController extends ItemsController {
-    constructor() {
-        super("https://node-hnapi.herokuapp.com/newest")
+    constructor(props) {
+        props.url = "https://node-hnapi.herokuapp.com/newest"
+        super(props)
     }    
 }
 
 class TopController extends ItemsController {
-   constructor() {
-        super("https://node-hnapi.herokuapp.com/news")
+   constructor(props) {
+       props.url = "https://node-hnapi.herokuapp.com/news"
+       super(props)
     }  
 }
 
 class ShowController extends ItemsController {
-   constructor() {
-        super("https://node-hnapi.herokuapp.com/show")
+   constructor(props) {
+        props.url = "https://node-hnapi.herokuapp.com/show"
+        super(props)
     }  
 }
 
 class AskController extends ItemsController {
-   constructor() {
-        super("https://node-hnapi.herokuapp.com/ask")
+   constructor(props) {
+        props;url = "https://node-hnapi.herokuapp.com/ask"
+        super(props)
     }  
 }
 
 class JobsController extends ItemsController {
-   constructor() {
-        super("https://node-hnapi.herokuapp.com/jobs")
+   constructor(props) {
+        props.url = "https://node-hnapi.herokuapp.com/jobs"
+        super(props)
     }  
 }
