@@ -12,6 +12,6 @@ class PushNavigator  {
 
         setTimeout( _ => {
             view.render()
-        },16)
+        },64)
     }
 }
