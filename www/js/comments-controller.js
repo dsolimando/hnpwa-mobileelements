@@ -1,7 +1,6 @@
 const commentsViewTemplate = barTitle => `
     <scell-view id="comments-view" transition="cover-vertical">
-        <scell-navigation-bar title="${barTitle}">
-            <span>Close</span>
+        <scell-navigation-bar title="${barTitle}" back-title="Close">
         </scell-navigation-bar>
         <div id="comments-container"></div>
     </scell-view>
@@ -16,13 +15,14 @@ class CommentsController {
         this.$el = $div.querySelector('scell-view')
         this.loadData()
 
+        this.$el.querySelector('scell-navigation-bar').addEventListener('back-click', event => {
+            this.$el.hide()
+            setTimeout( _ => {
+                this.$el.remove()
+            },200)
+        })
         this.$el.onclick = event => {
-            if (event.target.matches('scell-navigation-bar span')) {
-                this.$el.hide()
-                setTimeout( _ => {
-                    this.$el.remove()
-                },200)
-            } else if (event.target.matches('hn-item')) {
+            if (event.target.matches('hn-item')) {
                 open(event.target.getAttribute('url'),'_blank')
             }
         }
@@ -52,7 +52,7 @@ class CommentsController {
                     $comment.comment = comment
                     $container.appendChild($comment)
                 })         
-            },200)
+            },300)
         })
     } 
 

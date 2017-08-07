@@ -40,6 +40,10 @@ class NavigationBar extends HTMLElement {
         if (this.getAttribute('anim-back-title')) {
             this.$backTitle.style.transform = 'translateX(50px)'
         }
+
+        this.backZone.onclick = event => {
+            this.dispatchEvent(new CustomEvent('back-click'))
+        }
     } 
 
     render () {
