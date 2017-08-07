@@ -9,7 +9,6 @@ rest.get('/index.html').then {
     show.blocking {
         new URL("https://node-hnapi.herokuapp.com/news").text
     }.then { data ->
-        println data
         def scriptData = "<script>var initData=${data}</script>"
         new Response(200,['Content-Type':'text/html'],template.make([scriptData:scriptData]).toString())
     }
