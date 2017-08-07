@@ -7,7 +7,7 @@ def template = engine.createTemplate(new String (getClass().getResourceAsStream(
 
 rest.get('/index.html').then {
     show.http ([
-        url:'https://node-hnapi.herokuapp.com/show',
+        url:'https://node-hnapi.herokuapp.com/news',
         processResponse:false
     ]).then { body, status, resp ->
         def scriptData = "<script>var initData=${body}</script>"

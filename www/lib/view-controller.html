@@ -60,8 +60,9 @@
         hide () {
             if (this.getAttribute('transition') == 'cover-vertical') {
                 setTimeout( _ => {
-                    this.style.transform = 'perspective(100px) translate3D(0,0,-10px)'
-                    this.style.opacity = 0.
+                    //this.style.transform = 'perspective(100px) translate3D(0,0,-10px)'
+                    this.style.transform = 'translateY(100%)'
+                    //this.style.opacity = 0.
                 })
             } else if (this.getAttribute('transition') == 'cover-horizontal') {
                 setTimeout( _ => {
@@ -89,7 +90,7 @@
             }
             if (this.getAttribute("transition")) {
                 setTimeout( _ => {
-                    this.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    this.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
                 })
             }
         }

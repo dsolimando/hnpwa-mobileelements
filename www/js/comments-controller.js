@@ -22,6 +22,8 @@ class CommentsController {
                 setTimeout( _ => {
                     this.$el.remove()
                 },200)
+            } else if (event.target.matches('hn-item')) {
+                open(event.target.getAttribute('url'),'_blank')
             }
         }
     }
@@ -38,6 +40,7 @@ class CommentsController {
                 hnItem.points = response.points
                 hnItem.by = response.user
                 hnItem.since = response.time_ago
+                hnItem.url = response.url
                 hnItem.commentsCount = response.comments_count
 
                 $container.appendChild(hnItem)
