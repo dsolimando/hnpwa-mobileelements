@@ -2,25 +2,27 @@ class ItemsController {
 
     constructor(props) {
         this.props = props
-        this.$el = document.createElement('div')
 
         this.page = this.props.page || this.props.urlData ? this.props.urlData.page : 1
         this.pageSize = 30;
 
-        this.$pager = document.createElement('hn-pager')
-        this.$pager.setAttribute('page',this.page)
-        this.$pager.setAttribute('baseUrl',this.props.baseUrl)
-
-        this.$el.appendChild(this.$pager)
-
-        if (this.props.data)
-            this.createElements(this.props.data)
-        else if (this.props.url)
-            this.loadData(this.props.url)
-        else if (this.props.$el) {
+        if (this.props.$el)
             this.$el = this.props.$el
-        }
 
+        else {
+            this.$el = document.createElement('div')
+            this.$pager = document.createElement('hn-pager')
+            this.$pager.setAttribute('page',this.page)
+            this.$pager.setAttribute('baseUrl',this.props.baseUrl)
+
+             this.$el.appendChild(this.$pager)
+
+            if (this.props.data)
+                this.createElements(this.props.data)
+            else if (this.props.url)
+                this.loadData(this.props.url)
+        }
+        
         this.$el.onclick = event => {
             const $item = event.target.closest('hn-item')
             location.hash = location.hash+'/comment/'+$item.id
