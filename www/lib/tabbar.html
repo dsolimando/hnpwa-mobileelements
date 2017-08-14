@@ -69,6 +69,10 @@
             this.querySelectorAll('scell-tab')[index].style.color = this.getAttribute('active-color')
         }
 
+        setActiveByTabName (name) {
+            this.querySelector(`scell-tab[name="${name}"]`).style.color = this.getAttribute('active-color')
+        }
+
         connectedCallback() {
             if (window.ShadyCSS)
                 ShadyCSS.styleElement(this);

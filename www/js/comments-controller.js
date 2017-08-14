@@ -11,26 +11,38 @@ class CommentsController {
     constructor(props) {
         this.props = props
         const $div = document.createElement('div')
-        $div.innerHTML = commentsViewTemplate(props.title)
+        $div.innerHTML = commentsViewTemplate("Comments")
         this.$el = $div.querySelector('scell-view')
         this.loadData()
 
         this.$el.querySelector('scell-navigation-bar').addEventListener('back-click', event => {
-            this.$el.hide()
-            setTimeout( _ => {
-                this.$el.remove()
-            },200)
+            history.back()
         })
         this.$el.onclick = event => {
             if (event.target.matches('hn-item')) {
                 open(event.target.getAttribute('url'),'_blank')
             }
         }
+
+        const onhashchange = event => {
+            removeEventListener('hashchange',onhashchange)
+            this.close()
+        }
+        addEventListener('hashchange', onhashchange)
+    }
+
+    close () {
+        this.$el.hide()
+        
+        setTimeout( _ => {
+            this.$el.remove()
+        },200)
     }
 
     loadData() {
         
-        const data = fetch(`https://node-hnapi.herokuapp.com/item/${this.props.itemId}`).then( data => {
+        const itemId = this.props.urlData.id
+        const data = fetch(`https://node-hnapi.herokuapp.com/item/${itemId}`).then( data => {
             return data.json()
         }).then( response => {
             setTimeout(_ => {

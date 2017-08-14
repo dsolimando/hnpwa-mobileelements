@@ -23,6 +23,14 @@
             this.$container.innerHTML = ''
             this.$container.appendChild(controller.render())
         }
+
+        handleUrlRouting (routingData) {
+            Object.getOwnPropertyNames(routingData).forEach( key => {
+                if (this.handleRouting) {
+                    this.handleRouting(key,routingData[key])
+                }
+            },this)
+        }
     }
 
     customElements.define('scell-zone-navigator',ZoneNavigator)

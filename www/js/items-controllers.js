@@ -4,35 +4,23 @@ class ItemsController {
         this.props = props
         this.$el = document.createElement('div')
 
-        this.loading = false
-        
-        this.page = 1
+        this.page = this.props.page || this.props.urlData ? this.props.urlData.page : 1
         this.pageSize = 30;
+
+        this.$pager = document.createElement('hn-pager')
+        this.$pager.setAttribute('page',this.page)
+        this.$pager.setAttribute('baseUrl',this.props.baseUrl)
+
+        this.$el.appendChild(this.$pager)
 
         if (this.props.data)
             this.createElements(this.props.data)
         else
             this.loadData(this.props.url)
-        
-        this.pushNavigator = new PushNavigator()
-
-        this.$el.onscroll = event => {
-            if( this.$el.scrollTop + window.screen.height  >= this.$el.scrollHeight ) {
-                this.loadData(`${this.props.url}?page=${this.page}`)
-            }
-        }
 
         this.$el.onclick = event => {
             const $item = event.target.closest('hn-item')
-            setTimeout( _ => {
-                this.pushNavigator.push({
-                    viewController:CommentsController,
-                    props: {
-                        title:'Comments',
-                        itemId: $item.id
-                    }
-                })
-            },250)
+            location.hash = location.hash+'/comment/'+$item.id
         }
     }
 
@@ -53,17 +41,12 @@ class ItemsController {
             hnItem.commentsCount = result.comments_count
             this.$el.appendChild(hnItem)
         })
-        this.page++
     }
 
     loadData(url) {
-        if (this.loading) return
-        this.loading = true
-
         fetch(url).then( resp => { resp.json().then( results => {
             setTimeout( _ => {
                 this.createElements(results)                
-                this.loading = false
             },200)
         })})
     }
@@ -72,6 +55,7 @@ class ItemsController {
 class NewsController extends ItemsController {
     constructor(props) {
         props.url = "https://node-hnapi.herokuapp.com/newest"
+        props.baseUrl = '#new'
         super(props)
     }    
 }
@@ -79,6 +63,7 @@ class NewsController extends ItemsController {
 class TopController extends ItemsController {
    constructor(props) {
        props.url = "https://node-hnapi.herokuapp.com/news"
+       props.baseUrl = '#top'
        super(props)
     }  
 }
@@ -86,6 +71,7 @@ class TopController extends ItemsController {
 class ShowController extends ItemsController {
    constructor(props) {
         props.url = "https://node-hnapi.herokuapp.com/show"
+        props.baseUrl = '#show'
         super(props)
     }  
 }
@@ -93,6 +79,7 @@ class ShowController extends ItemsController {
 class AskController extends ItemsController {
    constructor(props) {
         props.url = "https://node-hnapi.herokuapp.com/ask"
+        props.baseUrl = '#ask'
         super(props)
     }  
 }
@@ -100,6 +87,7 @@ class AskController extends ItemsController {
 class JobsController extends ItemsController {
    constructor(props) {
         props.url = "https://node-hnapi.herokuapp.com/jobs"
+        props.baseUrl = '#jobs'
         super(props)
     }  
 }
