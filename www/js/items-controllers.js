@@ -15,8 +15,6 @@ class ItemsController {
             this.$pager.setAttribute('page',this.page)
             this.$pager.setAttribute('baseUrl',this.props.baseUrl)
 
-             this.$el.appendChild(this.$pager)
-
             if (this.props.data)
                 this.createElements(this.props.data)
             else if (this.props.url)
@@ -46,6 +44,7 @@ class ItemsController {
             hnItem.commentsCount = result.comments_count
             this.$el.appendChild(hnItem)
         })
+        this.$el.parentElement.appendChild(this.$pager)
     }
 
     loadData(url) {
