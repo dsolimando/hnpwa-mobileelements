@@ -141,10 +141,7 @@
             })
 
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js').then(
-                    registration => { console.log(registration) },
-                    error => {console.log(error)}
-                );
+                navigator.serviceWorker.register('/sw.js')
             }
         }
         if (!('import' in document.createElement('link'))) {
