@@ -15,8 +15,11 @@ class ItemsController {
 
         if (this.props.data)
             this.createElements(this.props.data)
-        else
+        else if (this.props.url)
             this.loadData(this.props.url)
+        else if (this.props.$el) {
+            this.$el = this.props.$el
+        }
 
         this.$el.onclick = event => {
             const $item = event.target.closest('hn-item')

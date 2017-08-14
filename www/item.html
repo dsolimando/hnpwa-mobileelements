@@ -46,8 +46,8 @@
     if (window.ShadyCSS)
         ShadyCSS.prepareTemplate($itemTemplate,'hn-item')
 
-    const detailsTemplate = (points, by, since, nbCom)  => 
-        `${points} points by ${by} ${since} | ${nbCom} comments` 
+    const detailsTemplate = (points, by, since, nbCom)  =>
+        `${points != 'null'?points+ ' points':''}  ${by!='null'?'by ' + by :''} ${since} | ${nbCom} comments` 
 
     customElements.define('hn-item', class HNItem extends HTMLElement {
         constructor() {

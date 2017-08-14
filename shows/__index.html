@@ -83,6 +83,7 @@
 <body> 
   	<body>
         <scell-view id="container">
+            ${markup}
         </scell-view>
         
         <scell-tab-bar active-color="rgb(40,152,211)">
@@ -95,7 +96,6 @@
         <scell-zone-navigator container-selector="#container"></scell-zone-navigator> 
     </body>
 
-    ${scriptData}
     <script src="lib/webcomponents-loader.js"></script>
     <script src="lib/push-navigator.js"></script>
     <script src="js/comments-controller.js"></script>
@@ -127,7 +127,7 @@
                 znavigator.push({
                     viewController:TopController,
                     props: {
-                        data:initData
+                        '\$el':document.querySelector('scell-view > div')
                     }
                 })
                 tabbar.setActiveByTabName('top')
@@ -140,12 +140,12 @@
                 location.hash = data.detail.name+"/1"
             })
 
-            // if ('serviceWorker' in navigator) {
-            //     navigator.serviceWorker.register('/sw.js').then(
-            //         registration => { console.log(registration) },
-            //         error => {console.log(error)}
-            //     );
-            // }
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js').then(
+                    registration => { console.log(registration) },
+                    error => {console.log(error)}
+                );
+            }
         }
         if (!('import' in document.createElement('link'))) {
             window.addEventListener('WebComponentsReady', _ => {
