@@ -7,7 +7,7 @@
 
     <style>
         :host {
-            position: absolute;
+            position: fixed;
             right: 20px;
             bottom: 50px;
         }
@@ -54,6 +54,9 @@
 <script>
     const pagerTemplate = document.currentScript.ownerDocument.querySelector("#pager-template")
 
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate(pagerTemplate,'hn-pager')
+
     customElements.define('hn-pager', class Pager extends HTMLElement {
         constructor() {
             super()
@@ -62,6 +65,10 @@
         }
 
         connectedCallback() {
+
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this)
+
             this.page = parseInt(this.getAttribute('page')) || 1
             this.baseUrl = this.getAttribute('baseUrl')
             
