@@ -1,6 +1,6 @@
 const openCache = caches.open('hn-vanilla-custom-elements');
 
-const version = 2.0
+const version = 2.1
 
 const cachedFiles = [
     '/',
@@ -13,6 +13,7 @@ const cachedFiles = [
     '/lib/webcomponents-loader.js',
     '/lib/webcomponents-hi-sd-ce.js',
     '/item.html',
+    '/pager.html',
     '/js/items-controllers.js',
     '/comment.html',
     '/js/comments-controller.js',
