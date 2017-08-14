@@ -10,10 +10,14 @@ class ItemsController {
             this.$el = this.props.$el
 
         else {
+            this.$df = document.createDocumentFragment()
             this.$el = document.createElement('div')
+            this.$df.appendChild(this.$el)
             this.$pager = document.createElement('hn-pager')
             this.$pager.setAttribute('page',this.page)
             this.$pager.setAttribute('baseUrl',this.props.baseUrl)
+
+            this.$df.appendChild(this.$pager)
 
             if (this.props.data)
                 this.createElements(this.props.data)
@@ -28,7 +32,7 @@ class ItemsController {
     }
 
     render() {
-        return this.$el
+        return this.$df
     }
 
     createElements(results) {
@@ -44,7 +48,6 @@ class ItemsController {
             hnItem.commentsCount = result.comments_count
             this.$el.appendChild(hnItem)
         })
-        this.$el.parentElement.appendChild(this.$pager)
     }
 
     loadData(url) {
