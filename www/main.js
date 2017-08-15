@@ -1,6 +1,6 @@
 const init = _ => {
     if (document.readyState != 'complete') {
-        setTimeout(init,200)
+        setTimeout(init,5)
     } else {
         const znavigator = document.querySelector('scell-zone-navigator')
         Object.assign(znavigator,urlRouting)
