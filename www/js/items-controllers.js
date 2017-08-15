@@ -13,6 +13,7 @@ class ItemsController {
             this.$df = document.createDocumentFragment()
             this.$el = document.createElement('div')
             this.$df.appendChild(this.$el)
+            
             this.$pager = document.createElement('hn-pager')
             this.$pager.setAttribute('page',this.page)
             this.$pager.setAttribute('baseUrl',this.props.baseUrl)
@@ -22,7 +23,7 @@ class ItemsController {
             if (this.props.data)
                 this.createElements(this.props.data)
             else if (this.props.url)
-                this.loadData(this.props.url)
+                this.loadData(`${this.props.url}?page=${this.page}`)
         }
         
         this.$el.onclick = event => {
