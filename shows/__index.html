@@ -10,13 +10,9 @@
 
     <link rel="manifest" href="manifest.js">
 
-    
-    <link rel="import" href="lib/tabbar.html">
+    <link rel="import" href="lib/tabbar.html" >
     <link rel="import" href="lib/view-controller.html">
-    <link rel="import" href="pager.html">
     <link rel="import" href="item.html">
-    
-    <link rel="import" href="comment.html">
     
     <style>
         body{
@@ -95,13 +91,15 @@
         <scell-zone-navigator container-selector="#container"></scell-zone-navigator> 
     </body>
 
+    <link rel="import" href="pager.html">
     <link rel="import" href="lib/navigation-bar.html">
     <link rel="import" href="lib/zone-navigator.html">
+    <link rel="import" href="comment.html">
 
-    <script src="lib/webcomponents-loader.js"></script>
+    <script src="lib/routing.js" defer></script>
+    <script src="lib/webcomponents-loader.js" defer></script>
     <script src="lib/push-navigator.js" defer></script>
     <script src="js/comments-controller.js" defer></script>
     <script src="js/items-controllers.js" defer></script>
-    <script src="lib/routing.js" defer></script>
     <script src="main.js" defer></script>
 </html> 

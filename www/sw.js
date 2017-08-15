@@ -1,6 +1,6 @@
 const openCache = caches.open('hn-vanilla-custom-elements');
 
-const version = 2.9
+const version = 2.12
 
 const cachedFiles = [
     '/',
@@ -18,6 +18,7 @@ const cachedFiles = [
     '/js/items-controllers.js',
     '/comment.html',
     '/js/comments-controller.js',
+    '/main.js',
 ]
 
 self.addEventListener('install', event => {

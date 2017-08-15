@@ -1,5 +1,5 @@
 {
-  "name": "Vanilla Custom Elements Hacker News",
+  "name": "WebComp HN",
   "short_name": "CustomElements HN",
   "start_url": "/",
   "display": "standalone",
