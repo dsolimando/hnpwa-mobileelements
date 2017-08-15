@@ -1,3 +1,6 @@
+const $scellView = document.querySelector('scell-view > div')
+$scellView.style.visibility = 'hidden'
+
 const init = _ => {
     if (document.readyState != 'complete') {
         setTimeout(init,5)
@@ -24,6 +27,7 @@ const init = _ => {
             new TopController({
                 '\$el':document.querySelector('scell-view > div')
             })
+            $scellView.style.visibility = 'visible'
             tabbar.setActiveByTabName('top')
         } else {
             tabbar.setActiveByTabName(location.hash.slice(1).split('/')[0])
