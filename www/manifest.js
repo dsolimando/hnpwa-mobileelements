@@ -1,6 +1,6 @@
 {
-  "name": "WebComp HN",
-  "short_name": "CustomElements HN",
+  "name": "WebComponents Hacker News",
+  "short_name": "WebComp HN",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#000",
