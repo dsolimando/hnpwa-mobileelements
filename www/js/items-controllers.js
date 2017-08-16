@@ -6,10 +6,10 @@ class ItemsController {
         this.page = this.props.page || this.props.urlData ? this.props.urlData.page : 1
         this.pageSize = 30;
 
-        if (this.props.$el)
+        if (this.props.$el) {
             this.$el = this.props.$el
-
-        else {
+            this.$pager = document.querySelector('hn-pager')
+        } else {
             this.$df = document.createDocumentFragment()
             this.$el = document.createElement('div')
             this.$df.appendChild(this.$el)
@@ -29,6 +29,14 @@ class ItemsController {
         this.$el.onclick = event => {
             const $item = event.target.closest('hn-item')
             location.hash = location.hash+'/comment/'+$item.id
+        }
+
+        this.$el.onscroll = event => {
+            if( this.$el.scrollTop + window.screen.height  >= this.$el.scrollHeight ) {
+                this.$pager.style.opacity = 0.2
+            } else {
+                this.$pager.style.opacity = 1
+            }
         }
     }
 
