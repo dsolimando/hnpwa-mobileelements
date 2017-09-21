@@ -8,7 +8,7 @@ def slurper = new JsonSlurper()
 
 rest.get('/index.html').then {
     show.blocking {
-        new URL("https://node-hnapi.herokuapp.com/news").text
+        new String(new URL("https://node-hnapi.herokuapp.com/news").bytes,'UTF-8')
     }.then { data ->
         def jsonData = slurper.parseText(data)
         def markup = '<div>'
