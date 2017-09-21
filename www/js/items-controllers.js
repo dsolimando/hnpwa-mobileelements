@@ -26,16 +26,20 @@ class ItemsController {
                 this.loadData(`${this.props.url}?page=${this.page}`)
         }
         
-        this.$el.onclick = event => {
-            const $item = event.target.closest('hn-item')
+        this.$el.addEventListener('item.comment.click', event => {
+            const $item = event.target
             location.hash = location.hash+'/comment/'+$item.id
-        }
+        })
+
+        this.$el.addEventListener('item.link.click', event => {
+            open(event.target.getAttribute('url'),'_blank')
+        })
 
         this.$el.onscroll = event => {
             if( this.$el.scrollTop + window.screen.height  >= this.$el.scrollHeight ) {
-                this.$pager.style.opacity = 0.2
+                this.$pager.classList.add('bottom-plus')
             } else {
-                this.$pager.style.opacity = 1
+                this.$pager.classList.remove('bottom-plus')
             }
         }
     }
@@ -52,6 +56,7 @@ class ItemsController {
             hnItem.id = result.id
             hnItem.title = result.title
             hnItem.points = result.points
+            hnItem.url = result.url
             hnItem.by = result.user
             hnItem.since = result.time_ago
             hnItem.commentsCount = result.comments_count

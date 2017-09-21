@@ -30,12 +30,14 @@
         }
 
         h4 {
-            margin:10px 0; 
+            margin:10px 0;
+            cursor: pointer;
         }
 
         p {
             margin: 10px 0;
             font-size: 13px;
+            cursor: pointer;
         }
     </style>
 </template>
@@ -62,13 +64,28 @@
                 ShadyCSS.styleElement(this);
 
             this.shadowRoot.querySelector('span').innerText = this.getAttribute('index') || ''
-            this.shadowRoot.querySelector('h4').innerText = this.getAttribute('title') || '' 
-            this.shadowRoot.querySelector('p').innerHTML = detailsTemplate (
+            const $h4 = this.shadowRoot.querySelector('h4')
+            const $p = this.shadowRoot.querySelector('p')
+            $h4.innerText = this.getAttribute('title') || '' 
+            $p.innerHTML = detailsTemplate (
                 this.getAttribute('points') || '',
                 this.getAttribute('by') || '',
                 this.getAttribute('since') || '',
                 this.getAttribute('comments-count') || ''
-            )           
+            )   
+            
+            $h4.onclick = _ => {
+                this.dispatchEvent(new CustomEvent('item.link.click',  {
+                    details: null, 
+                    bubbles: true, 
+                    cancelable: true
+                }))
+            }
+            $p.onclick = _ => this.dispatchEvent(new CustomEvent('item.comment.click', {
+                details: null, 
+                bubbles: true, 
+                cancelable: true
+            }))
         }
 
         get index() { return this.getAttribute('index')}

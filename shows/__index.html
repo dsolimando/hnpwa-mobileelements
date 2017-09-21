@@ -58,10 +58,22 @@
             background-color: #000;
         }
 
+        hn-pager.bottom-plus {
+            bottom: 120px;
+        }
+
+        hn-pager {
+            transition: 0.2s bottom ease-in-out;
+        }
+
         @media (min-width:420px) {
             scell-tab-bar {
                 top: 0;
                 bottom: default;
+            }
+
+            hn-pager.bottom-plus {
+                bottom: 10px;
             }
         }
 

@@ -36,6 +36,8 @@
 
             if (window.ShadyCSS)
                 ShadyCSS.styleElement(this);
+
+            this.style.cursor = 'pointer'
                 
             if (this.getAttribute('icon')) {
                 const image = new Image()

@@ -14,7 +14,7 @@ rest.get('/index.html').then {
         def markup = '<div>'
         def i = 1
         jsonData.each {
-            markup += """<hn-item index="${i++}" id="${it.id}" title="${it.title}" points="${it.points}" by="${it.user}" since="${it.time_ago}" comments-count="${it.comments_count}">
+            markup += """<hn-item index="${i++}" id="${it.id}" title="${it.title}" points="${it.points}" by="${it.user}" since="${it.time_ago}" comments-count="${it.comments_count}" url="${it.url}">
                 <h4>${i}&nbsp;${it.title}</h4>
             </hn-item>"""
         }
