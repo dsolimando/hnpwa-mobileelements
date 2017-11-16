@@ -119,7 +119,7 @@ class AskController extends ItemsController {
 class JobsController extends ItemsController {
    constructor(props) {
         props.url = "https://node-hnapi.herokuapp.com/jobs"
-    "'"    props.baseUrl = '#jobs'
+        props.baseUrl = '#jobs'
         super(props)
     }  
 
