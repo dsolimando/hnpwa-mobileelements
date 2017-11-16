@@ -110,12 +110,16 @@ class AskController extends ItemsController {
         props.baseUrl = '#ask'
         super(props)
     }  
+
+    openLink (item) {
+        this.openComment(item)
+    }
 }
 
 class JobsController extends ItemsController {
    constructor(props) {
         props.url = "https://node-hnapi.herokuapp.com/jobs"
-        props.baseUrl = '#jobs'
+    "'"    props.baseUrl = '#jobs'
         super(props)
     }  
 
