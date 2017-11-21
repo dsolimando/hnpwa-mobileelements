@@ -75,7 +75,8 @@
             )   
             
             $h4.onclick = _ => {
-                this.dispatchEvent(new CustomEvent('item.link.click',  {
+                const eventType = this.url.indexOf('item?id') == 0 ? 'item.comment.click':'item.link.click'
+                this.dispatchEvent(new CustomEvent(eventType,  {
                     details: null, 
                     bubbles: true, 
                     cancelable: true

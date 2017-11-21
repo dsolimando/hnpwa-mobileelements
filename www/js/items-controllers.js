@@ -27,11 +27,11 @@ class ItemsController {
         }
         
         this.$el.addEventListener('item.comment.click', event => {
-            this.openComment(event.target)
+            location.hash = location.hash+'/comment/'+event.target.id
         })
 
         this.$el.addEventListener('item.link.click', event => {
-           this.openLink(event.target)
+            open(event.target.url,'_blank')
         })
 
         this.$el.onscroll = event => {
@@ -41,14 +41,6 @@ class ItemsController {
                 this.$pager.classList.remove('bottom-plus')
             }
         }
-    }
-
-    openLink (item) {
-        open(item.getAttribute('url'),'_blank')
-    }
-
-    openComment (item) {
-        location.hash = location.hash+'/comment/'+item.id
     }
 
     render() {
@@ -63,7 +55,7 @@ class ItemsController {
             hnItem.id = result.id
             hnItem.title = result.title
             hnItem.points = result.points
-            hnItem.url = result.url
+            hnItem.url = result.url || ''
             hnItem.by = result.user
             hnItem.since = result.time_ago
             hnItem.commentsCount = result.comments_count
@@ -110,10 +102,6 @@ class AskController extends ItemsController {
         props.baseUrl = '#ask'
         super(props)
     }  
-
-    openLink (item) {
-        this.openComment(item)
-    }
 }
 
 class JobsController extends ItemsController {
@@ -122,8 +110,4 @@ class JobsController extends ItemsController {
         props.baseUrl = '#jobs'
         super(props)
     }  
-
-    openLink (item) {
-        this.openComment(item)
-    }
 }
