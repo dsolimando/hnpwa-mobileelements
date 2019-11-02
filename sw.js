@@ -3,13 +3,13 @@ const openCache = caches.open('hn-moko')
 const version = 3.0
 
 const cachedFiles = [
-  '/index.html',
-  '/components/Comment.js',
-  '/components/CommentsScreen.js',
-  '/components/Item.js',
-  '/components/ItemList.js',
-  '/components/navigators.js',
-  '/components/Pager.js'
+  './index.html',
+  './components/Comment.js',
+  './components/CommentsScreen.js',
+  './components/Item.js',
+  './components/ItemList.js',
+  './components/navigators.js',
+  './components/Pager.js'
 ]
 
 self.addEventListener('install', event => {
