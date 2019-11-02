@@ -1,0 +1,17 @@
+{
+  "name": "@solidx/hn-moko",
+  "version": "3.0.0",
+  "author": {
+    "name": "Damien Solimando",
+    "email": "dsolimando@gmail.com"
+  },
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2
+  }
+}

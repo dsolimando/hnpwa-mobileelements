@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000000" />
+
+    <title>HN Vanilla Custom Elements</title>
+
+    <link rel="manifest" href="manifest.js" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: '-apple-system', 'HelveticaNeue';
+      }
+
+      hn-item {
+        display: flex;
+      }
+
+      .item-list > hn-item:nth-child(even) {
+        background: #eaeaea;
+      }
+
+      hn-item a,
+      hn-item span {
+        text-decoration: none;
+        display: block;
+        font-size: 16px;
+        font-weight: lighter;
+        margin: 0 10px;
+        align-self: center;
+        color: #444;
+      }
+
+      hn-item span {
+        padding-left: 5px;
+        margin: 0 20px;
+      }
+
+      hn-item .details {
+        align-self: center;
+        color: #444;
+      }
+
+      hn-item h4 {
+        margin: 10px 0;
+        cursor: pointer;
+      }
+
+      hn-item p {
+        margin: 10px 0;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      hn-pager {
+        position: fixed;
+        right: 20px;
+        bottom: 60px;
+        bottom: calc(60px + env(safe-area-inset-bottom));
+        transition: 0.2s bottom ease-in-out;
+      }
+
+      hn-pager a {
+        text-decoration: none;
+      }
+
+      hn-pager ul {
+        display: inline-block;
+        padding: 0;
+      }
+
+      hn-pager li {
+        list-style: none;
+        display: inline-block;
+        background: #73628a;
+        color: #fff;
+        margin: 7px;
+        vertical-align: middle;
+        border-radius: 30px;
+        text-align: center;
+        width: 35px;
+        height: 35px;
+        box-sizing: border-box;
+        padding-top: 9px;
+        box-shadow: 2px 2px 4px 0px #999;
+        cursor: pointer;
+      }
+
+      hn-pager moko-icon {
+        height: 20px;
+      }
+
+      hn-pager li:nth-child(2) {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        padding-top: 14px;
+        box-shadow: 0 0 0;
+        cursor: default;
+      }
+
+      hn-news-stack-navigator,
+      hn-top-stack-navigator,
+      hn-show-stack-navigator,
+      hn-job-stack-navigator,
+      hn-ask-stack-navigator,
+      hn-news-list,
+      hn-comments-screen {
+        height: 100vh;
+        width: 100vw;
+        background: white;
+      }
+
+      hn-comment {
+        padding: 10px;
+        font-size: 14px;
+        display: block;
+        box-sizing: border-box;
+      }
+
+      hn-comment .content {
+        border-bottom: 1px solid #ddd;
+      }
+
+      moko-navigation-bar {
+        height: 60px;
+        background: #183642;
+        color: #fff;
+      }
+
+      moko-tab-bar {
+        background: #313d5a;
+        color: #fff;
+        height: 60px;
+      }
+
+      moko-tab {
+        font-size: 18px;
+      }
+
+      .item-list {
+        overflow-y: auto;
+        height: 100vh;
+        width: 100vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="height: 100%; width: 100vw; position: absolute;">
+      <moko-tab-navigator active-color="#CBC5EA">
+        <moko-tab-route
+          icon="zap"
+          title="News"
+          path="news"
+          component="hn-news-switch-navigator"
+        >
+        </moko-tab-route>
+        <moko-tab-route
+          icon="trending-up"
+          title="Top"
+          path="top"
+          component="hn-top-switch-navigator"
+        >
+        </moko-tab-route>
+        <moko-tab-route
+          icon="eye"
+          title="Show"
+          path="show"
+          component="hn-show-switch-navigator"
+        >
+        </moko-tab-route>
+        <moko-tab-route
+          icon="help-circle"
+          title="Ask"
+          path="ask"
+          component="hn-ask-switch-navigator"
+        >
+        </moko-tab-route>
+        <moko-tab-route
+          icon="briefcase"
+          title="Jobs"
+          path="job"
+          component="hn-jobs-switch-navigator"
+        >
+        </moko-tab-route>
+      </moko-tab-navigator>
+    </div>
+  </body>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/moko-navigators.min.js"
+  ></script>
+  <script type="module" src="components/CommentsScreen.js"></script>
+  <script type="module" src="components/Item.js"></script>
+  <script type="module" src="components/ItemList.js"></script>
+  <script type="module" src="components/Pager.js"></script>
+  <script type="module" src="components/navigators.js"></script>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/icon.min.js"
+    async
+  ></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+</html>
+s
