@@ -1,5 +1,5 @@
-import { customElement } from 'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/components/common/builder.js'
-import 'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/navigation-bar.min.js'
+import { customElement } from '../node_modules/@solidx/moko/components/common/builder.js'
+import '../node_modules/@solidx/moko/dist/navigation-bar.min.js'
 
 import './Comment.js'
 

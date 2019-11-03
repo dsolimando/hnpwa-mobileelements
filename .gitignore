@@ -1,3 +1,4 @@
 *.log
 .idea
-node_modules
+node_modules/prettier
+node_modules/.bin
