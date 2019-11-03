@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
 
     <title>HN Vanilla Custom Elements</title>
-
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link rel="manifest" href="manifest.js" />
 
     <style>
@@ -192,22 +192,25 @@
   </body>
   <script
     type="module"
+    src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/components/common/builder.js"
+  ></script>
+  <script
+    type="module"
     src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/moko-navigators.min.js"
   ></script>
-  <script type="module" src="components/CommentsScreen.js"></script>
   <script type="module" src="components/Item.js"></script>
   <script type="module" src="components/ItemList.js"></script>
-  <script type="module" src="components/Pager.js"></script>
   <script type="module" src="components/navigators.js"></script>
+  <script type="module" src="components/CommentsScreen.js" async></script>
+  <script type="module" src="components/Pager.js" async></script>
   <script
     type="module"
     src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/icon.min.js"
     async
   ></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
 </html>
-s
