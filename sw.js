@@ -10,10 +10,10 @@ const cachedFiles = [
   './components/ItemList.js',
   './components/navigators.js',
   './components/Pager.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/icon.min.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/moko-navigators.min.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/components/common/builder.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/navigation-bar.min.js'
+  './node_modules/@solidx/moko/dist/icon.min.js',
+  './node_modules/@solidx/moko/components/common/builder.js',
+  './node_modules/@solidx/moko/dist/moko-navigators.min.js',
+  './node_modules/@solidx/moko/dist/navigation-bar.min.js'
 ]
 
 self.addEventListener('install', event => {
