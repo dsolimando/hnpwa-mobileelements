@@ -1,4 +1,4 @@
-import { customElement } from '../node_modules/@solidx/moko/components/common/builder.js'
+import { customElement } from '../moko/components/common/builder.js'
 
 const pageSize = 30
 

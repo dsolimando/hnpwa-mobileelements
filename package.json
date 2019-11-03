@@ -14,7 +14,4 @@
     "singleQuote": true,
     "tabWidth": 2
   },
-  "dependencies": {
-    "@solidx/moko": "^2.0.6"
-  }
 }
