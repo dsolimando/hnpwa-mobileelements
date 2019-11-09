@@ -2,10 +2,10 @@ import { customElement } from '../moko/components/common/builder.js'
 
 const pageSize = 30
 
-const apiUrl = 'https://node-hnapi.herokuapp.com'
+const apiUrl = 'https://api.hnpwa.com/v0'
 
 async function getFeed(type, page) {
-  const response = await fetch(`${apiUrl}/${type}?page=${page}`)
+  const response = await fetch(`${apiUrl}/${type}/${page}.json`)
   return await response.json()
 }
 

@@ -23,7 +23,7 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      if (event.request.url.startsWith('https://node-hnapi.herokuapp.com')) {
+      if (event.request.url.startsWith('https://api.hnpwa.com/v0')) {
         return fetch(event.request).catch(error => response)
       } else {
         return response || fetch(event.request)
