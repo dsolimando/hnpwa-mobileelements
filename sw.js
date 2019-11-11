@@ -9,11 +9,7 @@ const cachedFiles = [
   './components/Item.js',
   './components/ItemList.js',
   './components/navigators.js',
-  './components/Pager.js',
-  './moko/dist/icon.min.js',
-  './moko/components/common/builder.js',
-  './moko/dist/moko-navigators.min.js',
-  './moko/dist/navigation-bar.min.js'
+  './components/Pager.js'
 ]
 
 self.addEventListener('install', event => {
