@@ -10,10 +10,10 @@ const cachedFiles = [
   './components/ItemList.js',
   './components/navigators.js',
   './components/Pager.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/icon.min.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/moko-navigators.min.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/components/common/builder.js',
-  'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/navigation-bar.min.js'
+  './moko/dist/icon.min.js',
+  './moko/components/common/builder.js',
+  './moko/dist/moko-navigators.min.js',
+  './moko/dist/navigation-bar.min.js'
 ]
 
 self.addEventListener('install', event => {
@@ -23,7 +23,7 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      if (event.request.url.startsWith('https://node-hnapi.herokuapp.com')) {
+      if (event.request.url.startsWith('https://api.hnpwa.com/v0')) {
         return fetch(event.request).catch(error => response)
       } else {
         return response || fetch(event.request)

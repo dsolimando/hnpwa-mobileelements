@@ -4,13 +4,16 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="initial-scale=1.0, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#183642" />
+    <meta name="Description" content="Hacker news client based on Moko library">
 
     <title>HN Vanilla Custom Elements</title>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link rel="dns-prefetch" href="https://node-hnapi.herokuapp.com" />
+    <link rel="dns-prefetch" href="https://api.hnpwa.com" />
+    <link rel="preload" href="https://api.hnpwa.com/v0/newest/1.json" as="fetch" crossorigin />
+    <link href="https://api.hnpwa.com" rel="preconnect" crossorigin>
     <link rel="manifest" href="manifest.js" />
-
     <style>
       body {
         margin: 0;
@@ -193,11 +196,11 @@
   </body>
   <script
     type="module"
-    src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/components/common/builder.js"
+    src="moko/components/common/builder.js"
   ></script>
   <script
     type="module"
-    src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/moko-navigators.min.js"
+    src="moko/dist/moko-navigators.min.js"
   ></script>
   <script type="module" src="components/Item.js"></script>
   <script type="module" src="components/ItemList.js"></script>
@@ -206,7 +209,7 @@
   <script type="module" src="components/Pager.js" async></script>
   <script
     type="module"
-    src="https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/dist/icon.min.js"
+    src="moko/dist/icon.min.js"
     async
   ></script>
   <script>

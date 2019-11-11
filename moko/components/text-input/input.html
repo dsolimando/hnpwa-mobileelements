@@ -1,0 +1,35 @@
+<label>
+    <input type="text" ></input>
+</label>
+
+<style>
+    label::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        background-image: var(--icon-svg);
+        width: calc(1em + 22px);
+        height: calc(1em + 22px);
+        background-repeat: no-repeat;
+        background-size: 1em;
+        background-position-y: 50%;
+        background-position-x: 5px;
+    }
+    input {
+        display: block;
+        width: calc(100% - 20px);
+        font-size: inherit;
+        font-size: var(--moko-input-font-size);
+        color: inherit;
+        padding: 10px 5px 10px 1.5em;
+        margin: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 0px;
+        outline: none;
+        background:#fefefe;
+        background: var(--moko-input-background-color);
+        background-color: var(--moko-input-background-color);
+    }
+</style>
