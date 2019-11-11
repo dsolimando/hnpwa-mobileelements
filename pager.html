@@ -1,0 +1,96 @@
+<template id="pager-template">
+    <ul>
+        <li id="back">&lt;
+        <li id="current-page-link">1
+        <li id="next">&gt;
+    </ul>
+
+    <style>
+        :host {
+            position: absolute;
+            right: 20px;
+            bottom: 50px;
+        }
+
+        @media (min-width:420px) {
+            :host {
+                bottom: 10px;
+            }
+        }
+
+        ul {
+            display: inline-block;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            display: inline-block;
+            background: #00A3DB;
+            color: #fff;
+            margin: 7px;
+            vertical-align: middle;
+            border-radius: 30px;
+            text-align: center;
+            width: 35px;
+            height: 35px;
+            box-sizing: border-box;
+            padding-top: 9px;
+            box-shadow: 2px 2px 4px 0px #999;
+            cursor: pointer;
+        }
+
+        li:nth-child(2){
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            padding-top: 14px;
+            box-shadow: 0 0 0;
+            cursor: default;
+        }
+    </style>
+</template>
+
+<script>
+    const pagerTemplate = document.currentScript.ownerDocument.querySelector("#pager-template")
+
+    if (window.ShadyCSS)
+        ShadyCSS.prepareTemplate(pagerTemplate,'hn-pager')
+
+    customElements.define('hn-pager', class Pager extends HTMLElement {
+        constructor() {
+            super()
+            const shadowRoot = this.attachShadow({mode:'open'})
+            shadowRoot.appendChild(pagerTemplate.content.cloneNode(true))
+        }
+
+        connectedCallback() {
+
+            if (window.ShadyCSS)
+                ShadyCSS.styleElement(this)
+
+            this.page = parseInt(this.getAttribute('page')) || 1
+            this.baseUrl = this.getAttribute('baseUrl')
+            
+            const $prev = this.shadowRoot.querySelector('li:nth-child(1)')
+            const $page = $prev.nextElementSibling
+            const $next = $page.nextElementSibling
+
+            $page.innerText = this.page
+
+            if (this.page == 1) {
+                $prev.style.visibility = 'hidden'
+            }
+
+            $prev.onclick = event => {
+                location = this.baseUrl + '/' + (this.page -1)
+                event.stopPropagation()
+            }
+
+            $next.onclick = event => {
+                location = this.baseUrl + '/' + (this.page +1)
+                event.stopPropagation()
+            }
+        }
+    })
+</script>

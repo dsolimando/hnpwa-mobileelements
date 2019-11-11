@@ -1,4 +1,4 @@
-import { customElement } from 'https://cdn.jsdelivr.net/npm/@solidx/moko@2.0.6/components/common/builder.min.js'
+import { customElement } from '../moko/components/common/builder.js'
 
 const NewsSwitchNavigator = customElement(
   () => `<moko-switch-navigator default-path="page/1">
